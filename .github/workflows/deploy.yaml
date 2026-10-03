@@ -41,9 +41,25 @@ jobs:
           tags: us-central1-docker.pkg.dev/binarygarden/bg-images/${{ env.IMAGE }}:${{ github.sha }}
           no-cache: true
 
-      # --clear-secrets drops secret refs stored on the service by earlier
-      # deploys (the removed EMAILJS_* secrets); swap for --set-secrets if the
-      # service ever needs secrets again
+      # A file sidesteps gcloud's comma-delimited flag parsing (ADMIN_USER_IDS
+      # is itself comma-separated). A provider stays off while its id is empty.
+      - name: Write runtime env vars
+        run: |
+          cat > env.yaml <<'EOF'
+          BETTER_AUTH_URL: "https://binarygarden.com"
+          EMAIL_FROM: "Binary Garden <auth@binarygarden.com>"
+          ADMIN_USER_IDS: "${{ vars.ADMIN_USER_IDS }}"
+          GITHUB_CLIENT_ID: "${{ vars.GITHUB_CLIENT_ID }}"
+          GOOGLE_CLIENT_ID: "${{ vars.GOOGLE_CLIENT_ID }}"
+          APPLE_CLIENT_ID: "${{ vars.APPLE_CLIENT_ID }}"
+          APPLE_TEAM_ID: "${{ vars.APPLE_TEAM_ID }}"
+          APPLE_KEY_ID: "${{ vars.APPLE_KEY_ID }}"
+          EOF
+
+      # --set-secrets replaces every secret ref on the service and fails if one
+      # doesn't exist in Secret Manager: drop a provider's secret until it does.
+      # --no-cpu-throttling lets auth emails finish sending after the response
+      # (they are intentionally not awaited; see src/lib/email.ts).
       - name: Deploy to Google Cloud Run
         run: |
           gcloud run deploy binary-garden \
@@ -52,4 +68,7 @@ jobs:
           --region us-central1 \
           --allow-unauthenticated \
           --service-account bg-cicd@binarygarden.iam.gserviceaccount.com \
-          --clear-secrets
+          --add-cloudsql-instances ${{ secrets.CLOUD_SQL_INSTANCE }} \
+          --no-cpu-throttling \
+          --env-vars-file env.yaml \
+          --set-secrets "BETTER_AUTH_SECRET=bg-auth-secret:latest,DATABASE_URL=bg-auth-database-url:latest,RESEND_API_KEY=bg-resend-api-key:latest,GITHUB_CLIENT_SECRET=bg-github-client-secret:latest,GOOGLE_CLIENT_SECRET=bg-google-client-secret:latest,APPLE_PRIVATE_KEY=bg-apple-private-key:latest"
