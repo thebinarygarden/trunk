@@ -6,7 +6,7 @@ import { enabledSocialProviders } from '@/lib/auth';
 export default async function SignUpPage() {
     await connection(); // providers come from runtime env, not the build
     return (
-        <AuthCard title="Create your account">
+        <AuthCard title="create your account">
             <SignUpForm socialProviders={enabledSocialProviders} />
         </AuthCard>
     );

@@ -6,7 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-The main Binary Garden site (`binarygarden.com`): a landing section, a list of projects, and the **central auth server** for the ecosystem (Better Auth, acting as an OAuth 2.1 / OpenID Connect provider for other apps such as flora.app). Next.js 16 (App Router, Turbopack), React 19, Tailwind CSS v4, TypeScript 5.x, pnpm, PostgreSQL.
+**trunk** is the codebase that runs on `binarygarden.com` (Binary Garden is the community; trunk is its site): a landing section, a list of projects, and the **central auth server** for the ecosystem (Better Auth, acting as an OAuth 2.1 / OpenID Connect provider for other apps such as flora.app). Next.js 16 (App Router, Turbopack), React 19, TypeScript 5.x, pnpm, PostgreSQL.
+
+The UI is built entirely from `@binarygarden/flora` and follows the Binary Garden design language — **read `../flora/docs/DESIGN.md` before changing anything visual.** Its one rule: the trunk is black and white; color comes from the products. Here that means the page is monochrome and the only color is a project's own hue, inside its `ProductTile` and its sheet.
 
 ## Commands
 
@@ -20,11 +22,11 @@ pnpm lint    # eslint (flat config in eslint.config.mjs)
 
 ## Structure
 
-- `src/app/layout.tsx` - root layout; wires Flora's `ScriptPreloadTheme` and `ThemeProvider`
-- `src/app/themes.ts` - Flora `lightTheme` / `darkTheme` (site palette)
-- `src/components/landing/` - hero section
-- `src/components/content/` - project list rendered from `projects.yaml` (read with `js-yaml` at build time)
-- `src/components/navbar/` - fixed top-right nav with a Sign in / Account link and Flora's `ThemeToggleButton`
+- `src/app/layout.tsx` - root layout; `next/font` Hanken Grotesk + Flora's `ScriptPreloadTheme`
+- `src/app/site.css` - page layout classes (there is no Tailwind; flora supplies the tokens and components)
+- `src/components/navbar/site_chrome.tsx` - `SiteHeader` / `BGFooter` wiring, incl. the session-aware sign in / account button
+- `src/components/content/` - project tiles + sheet, rendered from `projects.yaml` (read with `js-yaml` per request)
+- `src/components/auth/` - Better Auth forms, built on flora's `Input` / `Button` / `Checkbox`
 
 ## Auth (Better Auth)
 
@@ -44,14 +46,27 @@ pnpm lint    # eslint (flat config in eslint.config.mjs)
 
 ## Styling and Flora
 
-- UI and theming come from `@binarygarden/flora` via subpath imports (`/theme`, `/icons`, `/ui`). Check Flora before building new components here.
-- Flora's `ThemeProvider` sets CSS variables (`--background`, `--on-background`, `--primary`, `--on-surface`, `--border`, ...) on `<html>`. It does **not** add a `dark` class, so don't use Tailwind `dark:` variants. Use the variables instead, e.g. `bg-(--background)`, `text-(--primary)`, `shadow-(color:--primary)`.
-- `globals.css` imports `tailwindcss` then `@binarygarden/flora/styles.css`. There is no `tailwind.config.js` (Tailwind v4 is CSS-first).
-- `public/svg/wifi*.svg` have no Flora equivalent yet; they're candidates to move into Flora.
+- **There is no Tailwind.** It was removed along with the old theme system: flora's tokens already cover spacing, type, radius, shadow and motion, so a utility layer was a second vocabulary for the same things. `globals.css` imports `@binarygarden/flora/styles.css` then `./site.css`.
+- UI comes from `@binarygarden/flora` via subpath imports (`/form`, `/ui`, `/overlay`, `/navigation`, `/marketing`, `/theme`, `/icons`). **Check flora before building anything here** — and if what you need is reusable, build it in flora first.
+- Page scaffolding (containers, grids, the auth card) lives in `src/app/site.css` as plain classes. One-off layout can be an inline `style` reading tokens: `style={{ display: 'grid', gap: 'var(--space-4)' }}`.
+- Never hardcode a color. Always a token: `var(--accent)`, `var(--text-body)`, `var(--text-muted)`, `var(--line-1)`, `var(--danger)`. The old `--primary` / `--on-background` names are gone.
+- Light/dark is `data-theme` on `<html>`, set before first paint by `ScriptPreloadTheme` and flipped by flora's `ThemeToggleButton`. There is no `dark:` variant and no theme object.
+- Each project in `projects.yaml` carries a `hue` (0–360) — its one color, used by its `ProductTile` and by the `ProductScope` around its sheet.
+
+### Working against unreleased flora
+
+`package.json` depends on `@binarygarden/flora` from npm. To develop against the sibling `../flora` checkout:
+
+```bash
+pnpm sync:flora    # builds flora, copies its dist into node_modules (re-run after each flora edit)
+pnpm unsync:flora  # restore the published version
+```
+
+It copies rather than symlinks on purpose: a symlink points outside the Turbopack root and drags flora's own React in, which breaks every hook. Nothing about this reaches production — the Docker build copies only `package.json`, `pnpm-lock.yaml` and `pnpm-workspace.yaml` and installs from the registry.
 
 ## Deployment
 
-Push to `main` → GitHub Actions (`.github/workflows/deploy.yaml`) builds the multi-stage `Dockerfile` (Node 24, pnpm via corepack), pushes to `us-central1-docker.pkg.dev/binarygarden/bg-images/bg:<sha>`, and deploys the `binary-garden` Cloud Run service on port 3000.
+Push to `main` → GitHub Actions (`.github/workflows/deploy.yaml`) builds the multi-stage `Dockerfile` (Node 24, pnpm via corepack), pushes to `us-central1-docker.pkg.dev/binarygarden/bg-images/trunk:<sha>`, and deploys the `trunk` Cloud Run service on port 3000.
 
 - Postgres is the Cloud SQL instance named by the `CLOUD_SQL_INSTANCE` GitHub secret, attached with `--add-cloudsql-instances`. `DATABASE_URL` uses the Unix socket: `postgresql://USER:PASS@/DB?host=/cloudsql/PROJECT:REGION:INSTANCE`.
 - Secrets come from Secret Manager via `--set-secrets` (`bg-auth-secret`, `bg-auth-database-url`, `bg-resend-api-key`, `bg-github-client-secret`, `bg-google-client-secret`, `bg-apple-private-key`). Every secret listed must exist or the deploy fails.

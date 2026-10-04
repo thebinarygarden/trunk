@@ -5,7 +5,7 @@ import { ResetPasswordForm } from '@/components/auth/password_reset_forms';
 export default async function ResetPasswordPage({ searchParams }: { searchParams: Promise<{ token?: string }> }) {
     const { token } = await searchParams;
     return (
-        <AuthCard title="Choose a new password">
+        <AuthCard title="choose a new password">
             <ResetPasswordForm token={token} />
         </AuthCard>
     );
