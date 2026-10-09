@@ -1,22 +1,35 @@
-import { Hero } from '@binarygarden/flora/marketing';
+import { BGLanding } from '@binarygarden/flora/bg';
 import { Button } from '@binarygarden/flora/form';
-import { IconArrow, IconGithub } from '@binarygarden/flora/icons';
+import { ThemeToggleButton } from '@binarygarden/flora/theme';
+import { IconArrow, IconBGLogo, IconGithub } from '@binarygarden/flora/icons';
 import BGContent from '@/components/content/bg_content';
-import { SiteChrome, SiteFoot } from '@/components/navbar/site_chrome';
+import {
+  AccountButton,
+  SiteChrome,
+  SiteFoot,
+} from '@/components/navbar/site_chrome';
+import { AnchorScroll } from '@/components/navbar/anchor_scroll';
 
 export default function Home() {
   return (
     <>
-      <SiteChrome />
+      {/* the hero carries the nav, so the bar waits until its buttons leave */}
+      <SiteChrome revealAfter=".fl-hero-actions" />
       <main>
-        <Hero
+        {/* while the header is hidden, the account icon waits where the
+            header will put it: top right */}
+        <div className="hero-corner">
+          <AccountButton />
+        </div>
+        <BGLanding
+          eyebrowMark={<IconBGLogo size={6} />}
           eyebrow="binary garden"
           title={
             <>
-              open source, <em>for the people.</em>
+              open source, <em>for humans.</em>
             </>
           }
-          subtitle="a community of technical creatives building free software that shares one design language."
+          subtitle="home to every binary garden product. free, open source, made with love."
           actions={
             <>
               <Button
@@ -24,7 +37,7 @@ export default function Home() {
                 href="#projects"
                 iconRight={<IconArrow orientation="down" size={16} />}
               >
-                explore the garden
+                explore
               </Button>
               <Button
                 size="lg"
@@ -34,12 +47,14 @@ export default function Home() {
               >
                 contribute
               </Button>
+              <ThemeToggleButton />
             </>
           }
         />
         <BGContent />
       </main>
       <SiteFoot />
+      <AnchorScroll />
     </>
   );
 }

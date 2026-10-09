@@ -11,8 +11,7 @@ export default function BGContent() {
   return (
     <section id="projects" className="section">
       <div className="section-head">
-        <div className="eyebrow">projects</div>
-        <h2>one language. every project brings its own color.</h2>
+        <h2>projects.</h2>
       </div>
       <ProjectGrid projects={projects} />
     </section>

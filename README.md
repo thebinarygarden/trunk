@@ -1,6 +1,6 @@
 # trunk
 
-The codebase that runs on `binarygarden.com`: the Binary Garden site and central auth server. Built with Next.js 16, React 19, Tailwind CSS v4, and [Flora](https://www.npmjs.com/package/@binarygarden/flora) (`@binarygarden/flora`) for theming and UI components.
+The codebase that runs on `binarygarden.com`: the Binary Garden site and central auth server. Built with Next.js 16, React 19, and [Flora](https://www.npmjs.com/package/@binarygarden/flora) (`@binarygarden/flora`) for theming and UI components.
 
 ## Getting Started
 

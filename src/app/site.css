@@ -19,14 +19,37 @@
   display: grid;
   gap: var(--space-8);
 }
+/* the account icon over the landing hero, lined up with the header's
+   actions so it sits exactly where the header will bring it in */
+.hero-corner {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  max-width: var(--container-lg);
+  height: 60px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+}
+.hero-corner > * {
+  pointer-events: auto;
+}
+
+/* BGLanding snaps to the hero's bottom edge and the header reveals once the
+   hero's buttons leave the top, so whatever follows the hero must be at least
+   a screen tall, or the hero can never scroll fully away */
+.fl-bgl + .section {
+  min-height: 100svh;
+  box-sizing: border-box;
+  align-content: start;
+}
 .section-head {
   display: grid;
   gap: 10px;
-}
-.section-head .eyebrow {
-  font: var(--type-label);
-  letter-spacing: var(--tracking-label);
-  color: var(--text-faint);
 }
 .section-head h2 {
   font: var(--type-h1);
@@ -43,6 +66,14 @@
 }
 .tile-grid > * {
   animation: bg-rise var(--dur-4) var(--ease-spring) both;
+}
+/* each tile is its own product scope, so --accent-line / --accent are that
+   project's hue: a tinted border at rest, the full color on hover */
+.tile-grid .fl-tile {
+  border-color: var(--accent-line);
+}
+.tile-grid .fl-tile:hover {
+  border-color: var(--accent);
 }
 .tile-grid > *:nth-child(2) { animation-delay: var(--stagger); }
 .tile-grid > *:nth-child(3) { animation-delay: calc(var(--stagger) * 2); }
@@ -126,7 +157,7 @@
   align-items: center;
   gap: var(--space-3);
   font: var(--type-label);
-  color: var(--text-faint);
+  color: var(--text-muted);
 }
 .auth-divider::before,
 .auth-divider::after {

@@ -9,8 +9,15 @@ import { Badge, Tag } from '@binarygarden/flora/ui';
 import { IconGithub, IconLinkOut } from '@binarygarden/flora/icons';
 import type ProjectCard from '@/components/content/project_card';
 
-/** true when the link is a real youtube embed rather than a placeholder url */
-const hasVideo = (videoLink: string) => /\/embed\/[\w-]{6,}/.test(videoLink);
+/** the video id of a real youtube embed, or null for a placeholder url */
+const youtubeId = (videoLink: string) =>
+  videoLink.match(/\/embed\/([\w-]{6,})/)?.[1] ?? null;
+
+/** hqdefault exists for every video; the tile's splash crops its letterbox */
+const thumbnail = (videoLink: string) => {
+  const id = youtubeId(videoLink);
+  return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : undefined;
+};
 
 export function ProjectGrid({ projects }: { projects: ProjectCard[] }) {
   const [open, setOpen] = useState<string | null>(null);
@@ -26,6 +33,7 @@ export function ProjectGrid({ projects }: { projects: ProjectCard[] }) {
             tagline={p.projectSkills.join(' · ').toLowerCase()}
             hue={p.hue}
             glyph={p.projectName.slice(0, 2).toLowerCase()}
+            image={thumbnail(p.videoLink)}
             meta={p.isLive ? 'live' : 'in progress'}
             onClick={() => setOpen(p.projectName)}
           />
@@ -64,7 +72,7 @@ export function ProjectGrid({ projects }: { projects: ProjectCard[] }) {
             }
           >
             <div className="col">
-              {hasVideo(current.videoLink) && (
+              {youtubeId(current.videoLink) && (
                 <div className="sheet-video">
                   <iframe
                     src={current.videoLink}

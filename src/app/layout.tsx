@@ -14,7 +14,7 @@ const hanken = Hanken_Grotesk({
 
 export const metadata: Metadata = {
   title: 'binary garden',
-  description: 'open source, for the people.',
+  description: 'open source, for humans.',
 };
 
 export default function RootLayout({
