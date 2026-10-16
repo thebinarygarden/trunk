@@ -39,6 +39,11 @@
   pointer-events: auto;
 }
 
+/* the landing's background video, dimmed behind the hero */
+.landing-video {
+    opacity: 20%;
+}
+
 /* BGLanding snaps to the hero's bottom edge and the header reveals once the
    hero's buttons leave the top, so whatever follows the hero must be at least
    a screen tall, or the hero can never scroll fully away */

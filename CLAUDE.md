@@ -24,7 +24,7 @@ pnpm lint    # eslint (flat config in eslint.config.mjs)
 
 - `src/app/layout.tsx` - root layout; `next/font` Hanken Grotesk + Flora's `ScriptPreloadTheme`
 - `src/app/site.css` - page layout classes (there is no Tailwind; flora supplies the tokens and components)
-- `src/app/page.tsx` - the landing: flora's `BGLanding` (full-screen hero, scroll-snap, no background yet). The hero carries the nav, so `SiteChrome revealAfter=".fl-hero-actions"` keeps the header hidden until the hero's buttons scroll away
+- `src/app/page.tsx` - the landing: flora's `BGLanding` (full-screen hero, scroll-snap, `public/landing.mp4` as its background, dimmed via `.landing-video` in `site.css`). The hero carries the nav, so `SiteChrome revealAfter=".fl-hero-actions"` keeps the header hidden until the hero's buttons scroll away
 - `src/components/navbar/site_chrome.tsx` - `SiteHeader` / `BGFooter` wiring, incl. `AccountButton` (flora `IconAccount`; links to `/account` signed in, `/sign-in` signed out). The landing also renders it top right over the hero (`.hero-corner`) while the header is hidden
 - `src/components/content/` - project tiles + sheet, rendered from `projects.yaml` (read with `js-yaml` per request)
 - `src/components/auth/` - Better Auth forms, built on flora's `Input` / `Button` / `Checkbox`

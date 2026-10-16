@@ -30,6 +30,16 @@ export default function Home() {
             </>
           }
           subtitle="home to every binary garden product. free, open source, made with love."
+          background={
+            <video
+              className="landing-video"
+              src="/landing-animation-temporary.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          }
           actions={
             <>
               <Button
