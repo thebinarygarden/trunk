@@ -1,6 +1,6 @@
 import { load } from 'js-yaml';
 import fs from 'fs';
-import ProjectCard from '@/components/content/project_card';
+import ProjectCard from '@/components/content/project';
 import { ProjectGrid } from '@/components/content/project_grid';
 
 export default function BGContent() {

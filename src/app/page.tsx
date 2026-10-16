@@ -7,8 +7,7 @@ import {
   AccountButton,
   SiteChrome,
   SiteFoot,
-} from '@/components/navbar/site_chrome';
-import { AnchorScroll } from '@/components/navbar/anchor_scroll';
+} from '@/components/site_chrome';
 
 export default function Home() {
   return (
@@ -64,7 +63,6 @@ export default function Home() {
         <BGContent />
       </main>
       <SiteFoot />
-      <AnchorScroll />
     </>
   );
 }

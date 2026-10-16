@@ -23,7 +23,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={hanken.variable} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={hanken.variable}
+      // Next 16 leaves smooth scrolling on during route changes unless told
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <head>
         <ScriptPreloadTheme />
       </head>
