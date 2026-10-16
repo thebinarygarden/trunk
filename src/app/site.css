@@ -214,3 +214,46 @@
 .full {
   width: 100%;
 }
+
+/* ----------------------------------------------------------------- legal */
+.legal {
+  max-width: var(--container-sm);
+  margin: 0 auto;
+  padding: var(--space-16) var(--gutter) var(--space-24);
+  font: var(--type-body);
+  color: var(--text-muted);
+}
+.legal h1 {
+  font: var(--type-h1);
+  letter-spacing: var(--tracking-heading);
+  color: var(--text-body);
+  margin: 0;
+}
+.legal h2 {
+  font: var(--type-lg);
+  font-weight: var(--weight-medium);
+  color: var(--text-body);
+  margin: var(--space-10) 0 0;
+}
+.legal p,
+.legal ul {
+  margin: var(--space-3) 0 0;
+  text-wrap: pretty;
+}
+.legal ul {
+  padding-left: var(--space-5);
+  display: grid;
+  gap: var(--space-2);
+}
+.legal b {
+  color: var(--text-body);
+  font-weight: var(--weight-medium);
+}
+.legal a:not(.auth-back) {
+  color: var(--text-body);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.legal-updated {
+  font: var(--type-small);
+}

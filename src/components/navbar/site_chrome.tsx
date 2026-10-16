@@ -19,6 +19,8 @@ const FOOTER_LINKS = [
   { label: 'projects', href: '#projects' },
   { label: 'flora', href: 'https://bgflora.app' },
   { label: 'github', href: 'https://github.com/thebinarygarden' },
+  { label: 'privacy', href: '/privacy' },
+  { label: 'terms', href: '/terms' },
 ];
 
 /** `revealAfter`: a selector; the bar stays hidden until it scrolls away. */
