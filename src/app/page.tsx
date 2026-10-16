@@ -26,7 +26,7 @@ export default function Home() {
           eyebrow="binary garden"
           title={
             <>
-              open source, <em>for humans.</em>
+                simul sumus plus
             </>
           }
           subtitle="home to every binary garden product. free, open source, made with love."
