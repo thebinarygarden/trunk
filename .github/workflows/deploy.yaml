@@ -11,6 +11,9 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # keyless GCP login (Workload Identity Federation)
 
     steps:
       - name: Checkout code
@@ -22,7 +25,8 @@ jobs:
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v3
         with:
-          credentials_json: ${{ secrets.CICD_KEY }}
+          workload_identity_provider: projects/68521433417/locations/global/workloadIdentityPools/github/providers/github
+          service_account: bg-cicd@binarygarden.iam.gserviceaccount.com
 
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v3
@@ -60,6 +64,8 @@ jobs:
       # doesn't exist in Secret Manager: drop a provider's secret until it does.
       # --no-cpu-throttling lets auth emails finish sending after the response
       # (they are intentionally not awaited; see src/lib/email.ts).
+      # The service runs as trunk-runtime, not bg-cicd: the running app only
+      # needs to read its secrets and reach Cloud SQL, never deploy anything.
       - name: Deploy to Google Cloud Run
         run: |
           gcloud run deploy trunk \
@@ -67,8 +73,8 @@ jobs:
           --port=3000 \
           --region us-central1 \
           --allow-unauthenticated \
-          --service-account bg-cicd@binarygarden.iam.gserviceaccount.com \
+          --service-account trunk-runtime@binarygarden.iam.gserviceaccount.com \
           --add-cloudsql-instances ${{ secrets.CLOUD_SQL_INSTANCE }} \
           --no-cpu-throttling \
           --env-vars-file env.yaml \
-          --set-secrets "BETTER_AUTH_SECRET=bg-auth-secret:latest,DATABASE_URL=bg-auth-database-url:latest,RESEND_API_KEY=bg-resend-api-key:latest,GITHUB_CLIENT_SECRET=bg-github-client-secret:latest,GOOGLE_CLIENT_SECRET=bg-google-client-secret:latest,APPLE_PRIVATE_KEY=bg-apple-private-key:latest"
+          --set-secrets "BETTER_AUTH_SECRET=trunk-auth-secret:latest,DATABASE_URL=trunk-database-url:latest,GOOGLE_CLIENT_SECRET=trunk-google-client-secret:latest"

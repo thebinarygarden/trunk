@@ -69,7 +69,8 @@ It copies rather than symlinks on purpose: a symlink points outside the Turbopac
 
 Push to `main` → GitHub Actions (`.github/workflows/deploy.yaml`) builds the multi-stage `Dockerfile` (Node 24, pnpm via corepack), pushes to `us-central1-docker.pkg.dev/binarygarden/bg-images/trunk:<sha>`, and deploys the `trunk` Cloud Run service on port 3000.
 
+- The service runs as `trunk-runtime@binarygarden.iam.gserviceaccount.com` (Secret Manager accessor on its secrets + Cloud SQL Client only). `bg-cicd` deploys it and must never be the runtime identity.
 - Postgres is the Cloud SQL instance named by the `CLOUD_SQL_INSTANCE` GitHub secret, attached with `--add-cloudsql-instances`. `DATABASE_URL` uses the Unix socket: `postgresql://USER:PASS@/DB?host=/cloudsql/PROJECT:REGION:INSTANCE`.
-- Secrets come from Secret Manager via `--set-secrets` (`bg-auth-secret`, `bg-auth-database-url`, `bg-resend-api-key`, `bg-github-client-secret`, `bg-google-client-secret`, `bg-apple-private-key`). Every secret listed must exist or the deploy fails.
+- Secrets come from Secret Manager via `--set-secrets` (`trunk-auth-secret`, `trunk-database-url`, `trunk-google-client-secret`; add `trunk-resend-api-key`, `trunk-github-client-secret`, `trunk-apple-private-key` as each is created). Every secret listed must exist or the deploy fails.
 - Non-secret config (client ids, `ADMIN_USER_IDS`) comes from GitHub repository **variables** (`vars.*`), written to an env-vars file.
 - `--no-cpu-throttling` keeps CPU allocated after a response so unawaited auth emails finish sending.
