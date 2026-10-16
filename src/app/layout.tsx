@@ -1,24 +1,33 @@
-import './globals.css'
-import { ThemeProvider, ScriptPreloadTheme } from '@binarygarden/flora/theme';
-import { lightTheme, darkTheme } from '@/app/themes';
+import type { Metadata } from 'next';
+import { Hanken_Grotesk } from 'next/font/google';
+import './globals.css';
+import { ScriptPreloadTheme } from '@binarygarden/flora/theme';
 
-export const metadata = {
-  title: 'Binary Garden',
-  description: 'Open source for the people',
-}
+// Self-hosted by next/font, so there is no render-blocking request to Google
+// and no flash of the fallback stack. flora only names the family.
+const hanken = Hanken_Grotesk({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-hanken',
+  display: 'swap',
+});
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const metadata: Metadata = {
+  title: 'binary garden',
+  description: 'simul sumus plus',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-      <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={hanken.variable} suppressHydrationWarning>
       <head>
-          <ScriptPreloadTheme lightTheme={lightTheme} darkTheme={darkTheme} />
+        <ScriptPreloadTheme />
       </head>
-      <body className={"bg-(--background)"}>
-      <ThemeProvider lightTheme={lightTheme} darkTheme={darkTheme}>
-          {children}
-      </ThemeProvider>
-      <br/><br/><br/>
-      </body>
+      <body>{children}</body>
     </html>
-  )
+  );
 }

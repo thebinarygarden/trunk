@@ -9,7 +9,7 @@ WORKDIR /app
 # pnpm version comes from the packageManager field in package.json
 RUN corepack enable
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # Rebuild the source code only when needed
