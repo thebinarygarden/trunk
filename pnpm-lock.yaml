@@ -176,8 +176,8 @@ importers:
         specifier: 0.4.2
         version: 0.4.2
       '@binarygarden/flora':
-        specifier: ^0.1.1
-        version: 0.1.1(framer-motion@13.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        specifier: ^0.1.2
+        version: 0.1.2(framer-motion@13.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       better-auth:
         specifier: ^1.7.4
         version: 1.7.4(next@16.3.5(@babel/core@7.29.7(supports-color@7.2.0))(@types/node@24.13.4)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(pg@8.23.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -395,8 +395,8 @@ packages:
   '@better-fetch/fetch@1.3.1':
     resolution: {integrity: sha512-ABkD1WhyfPZprKRQI3bhATjeiFuNWC9PXhfGWqL+sg/gKrM977oFrYkdb4msM3hgUGonr7KlOsOFT5TU2rht9g==}
 
-  '@binarygarden/flora@0.1.1':
-    resolution: {integrity: sha512-t3qiwL1mpSBc+TfYu/hXmjVq8eZEZg2alzObpC7uZ+W4TSYdCFQJVw0KMH79oIFXRIjug3X5ZuwOm2H5QNIYzg==}
+  '@binarygarden/flora@0.1.2':
+    resolution: {integrity: sha512-68r8rI/B3iRW32C424DWQi5ftx4evtXOPX5N5URN7r7zpRmCVQBENLb4JS3t6qqgiLAWIp705nvrE9G4jy6YBA==}
     peerDependencies:
       framer-motion: ^13.0.0
       react: ^19.0.0
@@ -2579,7 +2579,7 @@ snapshots:
 
   '@better-fetch/fetch@1.3.1': {}
 
-  '@binarygarden/flora@0.1.1(framer-motion@13.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
+  '@binarygarden/flora@0.1.2(framer-motion@13.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
       framer-motion: 13.2.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       react: 19.3.0
