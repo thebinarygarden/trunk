@@ -1,0 +1,38 @@
+name: CI
+
+# Runs on every PR into main, so a broken lint or build shows on the PR instead
+# of failing the deploy after the merge.
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      # pnpm version comes from the packageManager field in package.json
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      # next build also type-checks
+      - name: Build
+        run: pnpm build
