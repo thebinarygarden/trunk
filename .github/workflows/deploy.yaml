@@ -52,12 +52,12 @@ jobs:
           cat > env.yaml <<'EOF'
           BETTER_AUTH_URL: "https://binarygarden.com"
           EMAIL_FROM: "Binary Garden <auth@binarygarden.com>"
-          ADMIN_USER_IDS: "${{ vars.ADMIN_USER_IDS }}"
-          GITHUB_CLIENT_ID: "${{ vars.GITHUB_CLIENT_ID }}"
-          GOOGLE_CLIENT_ID: "${{ vars.GOOGLE_CLIENT_ID }}"
-          APPLE_CLIENT_ID: "${{ vars.APPLE_CLIENT_ID }}"
-          APPLE_TEAM_ID: "${{ vars.APPLE_TEAM_ID }}"
-          APPLE_KEY_ID: "${{ vars.APPLE_KEY_ID }}"
+          ADMIN_USER_IDS: "${{ secrets.ADMIN_USER_IDS }}"
+          GITHUB_CLIENT_ID: "${{ secrets.GH_CLIENT_ID }}"
+          GOOGLE_CLIENT_ID: "${{ secrets.GOOGLE_CLIENT_ID }}"
+          APPLE_CLIENT_ID: "${{ secrets.APPLE_CLIENT_ID }}"
+          APPLE_TEAM_ID: "${{ secrets.APPLE_TEAM_ID }}"
+          APPLE_KEY_ID: "${{ secrets.APPLE_KEY_ID }}"
           EOF
 
       # --set-secrets replaces every secret ref on the service and fails if one

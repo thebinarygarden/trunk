@@ -73,5 +73,5 @@ It copies rather than symlinks on purpose: a symlink points outside the Turbopac
 - The service runs as `trunk-runtime` (read its own secrets + Cloud SQL Client, nothing else). `bg-cicd` only deploys; never make it the runtime identity.
 - Postgres: Cloud SQL instance `trunk-db` (from the `CLOUD_SQL_INSTANCE` GitHub secret, attached with `--add-cloudsql-instances`), database `chamber_of_secrets`, user `trunk`. `DATABASE_URL` uses the Unix socket: `postgresql://trunk:PASS@/chamber_of_secrets?host=/cloudsql/binarygarden:us-central1:trunk-db`.
 - Secrets come from Secret Manager via `--set-secrets`: `trunk-auth-secret`, `trunk-database-url`, `trunk-google-client-secret`. Add `trunk-resend-api-key`, `trunk-github-client-secret`, `trunk-apple-private-key` as each is created, and grant `trunk-runtime` access to it. Every secret listed must exist or the deploy fails.
-- Non-secret config (client ids, `ADMIN_USER_IDS`) comes from GitHub repository **variables** (`vars.*`), written to an env-vars file.
+- Non-secret config (client ids, `ADMIN_USER_IDS`) comes from GitHub repository **secrets**, like `CLOUD_SQL_INSTANCE`, written to an env-vars file. GitHub rejects names starting with `GITHUB_`, so the GitHub OAuth client id is stored as `GH_CLIENT_ID`.
 - `--no-cpu-throttling` keeps CPU allocated after a response so unawaited auth emails finish sending.
