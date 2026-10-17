@@ -44,3 +44,22 @@ Projects shown on the home page are defined in `projects.yaml`.
 ## Deployment
 
 Pushing to `main` builds the Docker image, pushes it to Artifact Registry, and deploys it to the `trunk` Cloud Run service (`.github/workflows/deploy.yaml`).
+
+## License
+
+trunk is licensed under the GNU Affero General Public License, version 3 or any later
+version (`AGPL-3.0-or-later`). You can use, change and sell it. If you distribute a
+modified version, or run one that people use over a network, you must make its source
+code available to them under the same license. The full text is in [LICENSE](LICENSE).
+
+```
+Copyright (C) 2026 Binary Garden
+
+This program is free software: you can redistribute it and/or modify it under the terms
+of the GNU Affero General Public License as published by the Free Software Foundation,
+either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+```

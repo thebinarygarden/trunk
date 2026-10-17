@@ -70,7 +70,7 @@ export function SiteFoot() {
     <BGFooter
       brand={<IconBGLogo size={28} />}
       links={FOOTER_LINKS}
-      legal="© 2026 binary garden · mit"
+      legal="© 2026 binary garden · agpl"
     />
   );
 }

@@ -12,7 +12,7 @@ export default function TermsPage() {
         back to binary garden
       </Link>
       <h1>terms of service</h1>
-      <p className="legal-updated">last updated october 16, 2026</p>
+      <p className="legal-updated">last updated october 17, 2026</p>
 
       <p>
         these terms cover your use of binarygarden.com and your binary garden
@@ -60,8 +60,8 @@ export default function TermsPage() {
       <p>
         our code is open source and published on{' '}
         <a href="https://github.com/thebinarygarden">github</a>. each project&apos;s
-        license (mostly mit) covers the code itself. these terms cover the hosted
-        service at binarygarden.com.
+        license covers the code itself; current projects use the agpl-3.0. these
+        terms cover the hosted service at binarygarden.com.
       </p>
 
       <h2>no warranty</h2>
