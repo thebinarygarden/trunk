@@ -6,10 +6,11 @@
   --font-sans: var(--font-hanken), 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.page {
-  max-width: var(--container-lg);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
+/* In-page links (explore, the header's projects link) glide to their section. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 .section {

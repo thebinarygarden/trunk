@@ -7,7 +7,7 @@ import { Dialog } from '@binarygarden/flora/overlay';
 import { Button } from '@binarygarden/flora/form';
 import { Badge, Tag } from '@binarygarden/flora/ui';
 import { IconGithub, IconLinkOut } from '@binarygarden/flora/icons';
-import type ProjectCard from '@/components/content/project_card';
+import type ProjectCard from '@/components/content/project';
 
 /** the video id of a real youtube embed, or null for a placeholder url */
 const youtubeId = (videoLink: string) =>

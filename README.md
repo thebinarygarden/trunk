@@ -1,10 +1,10 @@
 # trunk
 
-The codebase that runs on `binarygarden.com`: the Binary Garden site and central auth server. Built with Next.js 16, React 19, and [Flora](https://www.npmjs.com/package/@binarygarden/flora) (`@binarygarden/flora`) for theming and UI components.
+The codebase that runs on `binarygarden.com`: the Binary Garden site and central auth server. Built with Next.js, React and [Flora](https://www.npmjs.com/package/@binarygarden/flora) (`@binarygarden/flora`) for theming and UI components.
 
 ## Getting Started
 
-Requires Node.js 20.9+, pnpm, and Docker. The site is also the Binary Garden auth server, so it needs a PostgreSQL database; for local development that runs in Docker.
+Requires Node.js 24, pnpm, and Docker. The site is also the Binary Garden auth server, so it needs a PostgreSQL database; for local development that runs in Docker.
 
 ### Database
 ```bash
@@ -25,6 +25,8 @@ pnpm dev     # start the dev server; auth tables are created on startup
 pnpm build   # production build
 pnpm lint    # eslint
 ```
+
+To try unreleased changes from a sibling `../flora` checkout, `pnpm sync:flora` builds it and copies it into `node_modules` (re-run after each flora edit); `pnpm unsync:flora` restores the published version.
 
 ### Docker
 ```

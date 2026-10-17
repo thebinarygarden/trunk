@@ -16,14 +16,12 @@ const LINKS = [
 ];
 
 const FOOTER_LINKS = [
-  { label: 'projects', href: '#projects' },
-  { label: 'flora', href: 'https://bgflora.app' },
+  ...LINKS,
   { label: 'github', href: 'https://github.com/thebinarygarden' },
   { label: 'privacy', href: '/privacy' },
   { label: 'terms', href: '/terms' },
 ];
 
-/** `revealAfter`: a selector; the bar stays hidden until it scrolls away. */
 /** The account icon: your account when signed in, sign in when not. */
 export async function AccountButton() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -37,7 +35,8 @@ export async function AccountButton() {
   );
 }
 
-export async function SiteChrome({ revealAfter }: { revealAfter?: string }) {
+/** `revealAfter`: a selector; the bar stays hidden until it scrolls away. */
+export function SiteChrome({ revealAfter }: { revealAfter?: string }) {
   return (
     <SiteHeader
       brand={
