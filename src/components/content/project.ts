@@ -1,5 +1,6 @@
 export default interface ProjectCard {
   projectName: string;
+  /** html; projects.yaml holds one per locale and the page picks one */
   projectDescription: string;
   projectSkills: string[];
   videoLink: string;

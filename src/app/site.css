@@ -149,6 +149,17 @@
 .auth-back:hover {
   color: var(--text-body);
 }
+/* the back link with the language picker on the right */
+.auth-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+.auth-top .auth-back {
+  margin-bottom: 0;
+}
 .auth-title {
   font: var(--type-h2);
   letter-spacing: var(--tracking-heading);

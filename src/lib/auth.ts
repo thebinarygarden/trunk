@@ -6,6 +6,8 @@ import { passkey } from '@better-auth/passkey';
 import { Pool } from 'pg';
 import { appleClientSecret } from '@/lib/apple';
 import { sendEmail } from '@/lib/email';
+import { format } from '@/lib/format';
+import { dictionaryFor } from '@/lib/i18n';
 
 const env = process.env;
 const baseURL = env.BETTER_AUTH_URL ?? 'http://localhost:3000';
@@ -47,15 +49,17 @@ export const auth = betterAuth({
     emailAndPassword: {
         enabled: true,
         requireEmailVerification: true,
-        sendResetPassword: async ({ user, url }) => {
-            sendEmail(user.email, 'Reset your Binary Garden password', `Reset your password: ${url}`);
+        sendResetPassword: async ({ user, url }, request) => {
+            const { email } = dictionaryFor(request);
+            sendEmail(user.email, email.resetSubject, format(email.resetBody, { url }));
         },
     },
     emailVerification: {
         sendOnSignUp: true,
         autoSignInAfterVerification: true,
-        sendVerificationEmail: async ({ user, url }) => {
-            sendEmail(user.email, 'Verify your Binary Garden email', `Verify your email: ${url}`);
+        sendVerificationEmail: async ({ user, url }, request) => {
+            const { email } = dictionaryFor(request);
+            sendEmail(user.email, email.verifySubject, format(email.verifyBody, { url }));
         },
     },
     socialProviders,

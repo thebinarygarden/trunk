@@ -8,6 +8,8 @@ import { Button } from '@binarygarden/flora/form';
 import { Badge, Tag } from '@binarygarden/flora/ui';
 import { IconGithub, IconLinkOut } from '@binarygarden/flora/icons';
 import type ProjectCard from '@/components/content/project';
+import { format } from '@/lib/format';
+import type { Dict } from '@/lib/i18n';
 
 /** the video id of a real youtube embed, or null for a placeholder url */
 const youtubeId = (videoLink: string) =>
@@ -19,7 +21,13 @@ const thumbnail = (videoLink: string) => {
   return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : undefined;
 };
 
-export function ProjectGrid({ projects }: { projects: ProjectCard[] }) {
+export function ProjectGrid({
+  projects,
+  t,
+}: {
+  projects: ProjectCard[];
+  t: Dict['home'];
+}) {
   const [open, setOpen] = useState<string | null>(null);
   const current = projects.find((p) => p.projectName === open);
 
@@ -34,7 +42,7 @@ export function ProjectGrid({ projects }: { projects: ProjectCard[] }) {
             hue={p.hue}
             glyph={p.projectName.slice(0, 2).toLowerCase()}
             image={thumbnail(p.videoLink)}
-            meta={p.isLive ? 'live' : 'in progress'}
+            meta={p.isLive ? t.live : t.inProgress}
             onClick={() => setOpen(p.projectName)}
           />
         ))}
@@ -51,21 +59,23 @@ export function ProjectGrid({ projects }: { projects: ProjectCard[] }) {
             footer={
               <>
                 <Button variant="ghost" onClick={() => setOpen(null)}>
-                  close
+                  {t.close}
                 </Button>
                 <Button
                   variant="secondary"
                   href={current.repoLink}
                   iconLeft={<IconGithub size={14} />}
                 >
-                  source
+                  {t.source}
                 </Button>
                 {current.isLive && (
                   <Button
                     href={current.liveLink}
                     iconRight={<IconLinkOut size={14} />}
                   >
-                    play {current.projectName.toLowerCase()}
+                    {format(t.play, {
+                      name: current.projectName.toLowerCase(),
+                    })}
                   </Button>
                 )}
               </>
@@ -94,7 +104,7 @@ export function ProjectGrid({ projects }: { projects: ProjectCard[] }) {
                   {current.projectName.toLowerCase()}
                 </h2>
                 <Badge tone={current.isLive ? 'ok' : 'warn'} dot>
-                  {current.isLive ? 'live' : 'in progress'}
+                  {current.isLive ? t.live : t.inProgress}
                 </Badge>
               </div>
 

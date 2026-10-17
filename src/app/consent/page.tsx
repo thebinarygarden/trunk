@@ -3,13 +3,8 @@ import { redirect } from 'next/navigation';
 import { AuthCard } from '@/components/auth/auth_card';
 import { ConsentButtons } from '@/components/auth/consent_buttons';
 import { auth } from '@/lib/auth';
-
-const scopeDescriptions: Record<string, string> = {
-  openid: 'confirm who you are',
-  profile: 'see your name and profile picture',
-  email: 'see your email address',
-  offline_access: 'stay signed in without asking again',
-};
+import { format } from '@/lib/format';
+import { getI18n } from '@/lib/i18n';
 
 // The OAuth provider sends signed-in users here with ?client_id=...&scope=... when an
 // app that isn't marked first-party (skip_consent) asks for access.
@@ -27,21 +22,25 @@ export default async function ConsentPage({
     query: { client_id },
     headers: requestHeaders,
   });
-  const appName = client.client_name ?? 'an application';
+  const { t } = await getI18n();
+  const scopes: Record<string, string> = t.auth.consent.scopes;
+  const appName = client.client_name ?? t.auth.consent.anApp;
 
   return (
-    <AuthCard title={`allow ${appName}?`}>
+    <AuthCard title={format(t.auth.consent.title, { app: appName })}>
       <div className="col">
         <p className="auth-note">
-          {appName} wants to use your binary garden account to:
+          {format(t.auth.consent.wants, { app: appName })}
         </p>
         <ul className="scopes">
           {scope?.split(' ').map((s) => (
-            <li key={s}>{scopeDescriptions[s] ?? s}</li>
+            <li key={s}>{scopes[s] ?? s}</li>
           ))}
         </ul>
-        <p className="auth-note">signed in as {session.user.email}</p>
-        <ConsentButtons />
+        <p className="auth-note">
+          {format(t.auth.consent.signedInAs, { email: session.user.email })}
+        </p>
+        <ConsentButtons t={t.auth} />
       </div>
     </AuthCard>
   );

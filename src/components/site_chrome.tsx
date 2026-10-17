@@ -9,25 +9,28 @@ import {
 } from '@binarygarden/flora/icons';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
+import { getI18n, type Dict } from '@/lib/i18n';
+import { LocaleToggle } from '@/components/locale_toggle';
 
-const LINKS = [
-  { label: 'projects', href: '#projects' },
-  { label: 'flora', href: 'https://bgflora.app' },
+const links = (t: Dict) => [
+  { label: t.nav.projects, href: '#projects' },
+  { label: t.nav.flora, href: 'https://bgflora.app' },
 ];
 
-const FOOTER_LINKS = [
-  ...LINKS,
-  { label: 'github', href: 'https://github.com/thebinarygarden' },
-  { label: 'privacy', href: '/privacy' },
-  { label: 'terms', href: '/terms' },
+const footerLinks = (t: Dict) => [
+  ...links(t),
+  { label: t.nav.github, href: 'https://github.com/thebinarygarden' },
+  { label: t.nav.privacy, href: '/privacy' },
+  { label: t.nav.terms, href: '/terms' },
 ];
 
 /** The account icon: your account when signed in, sign in when not. */
 export async function AccountButton() {
   const session = await auth.api.getSession({ headers: await headers() });
+  const { t } = await getI18n();
   return (
     <IconButton
-      label={session ? 'account' : 'sign in'}
+      label={session ? t.nav.account : t.nav.signIn}
       href={session ? '/account' : '/sign-in'}
     >
       <IconAccount size={18} />
@@ -36,7 +39,8 @@ export async function AccountButton() {
 }
 
 /** `revealAfter`: a selector; the bar stays hidden until it scrolls away. */
-export function SiteChrome({ revealAfter }: { revealAfter?: string }) {
+export async function SiteChrome({ revealAfter }: { revealAfter?: string }) {
+  const { t } = await getI18n();
   return (
     <SiteHeader
       brand={
@@ -45,18 +49,20 @@ export function SiteChrome({ revealAfter }: { revealAfter?: string }) {
           <span className="fl-header-brand-name">binary garden</span>
         </>
       }
-      links={LINKS}
+      links={links(t)}
       revealAfter={revealAfter}
+      labels={t.flora.header}
       actions={
         <>
-          <ThemeToggleButton />
+          <LocaleToggle />
+          <ThemeToggleButton labels={t.flora.theme} />
           <Button
             variant="secondary"
             size="sm"
             href="https://github.com/thebinarygarden"
             iconLeft={<IconGithub size={14} />}
           >
-            github
+            {t.nav.github}
           </Button>
           <AccountButton />
         </>
@@ -65,12 +71,13 @@ export function SiteChrome({ revealAfter }: { revealAfter?: string }) {
   );
 }
 
-export function SiteFoot() {
+export async function SiteFoot() {
+  const { t } = await getI18n();
   return (
     <BGFooter
       brand={<IconBGLogo size={28} />}
-      links={FOOTER_LINKS}
-      legal="© 2026 binary garden · agpl"
+      links={footerLinks(t)}
+      legal={t.nav.legal}
     />
   );
 }

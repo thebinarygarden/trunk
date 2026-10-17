@@ -3,13 +3,16 @@ import { Button } from '@binarygarden/flora/form';
 import { ThemeToggleButton } from '@binarygarden/flora/theme';
 import { IconArrow, IconBGLogo, IconGithub } from '@binarygarden/flora/icons';
 import BGContent from '@/components/content/bg_content';
+import { LocaleToggle } from '@/components/locale_toggle';
+import { getI18n } from '@/lib/i18n';
 import {
   AccountButton,
   SiteChrome,
   SiteFoot,
 } from '@/components/site_chrome';
 
-export default function Home() {
+export default async function Home() {
+  const { t } = await getI18n();
   return (
     <>
       {/* the hero carries the nav, so the bar waits until its buttons leave */}
@@ -28,7 +31,7 @@ export default function Home() {
                 simul sumus plus
             </>
           }
-          subtitle="home to every binary garden product. free, open source, made with love."
+          subtitle={t.home.subtitle}
           background={
             <video
               className="landing-video"
@@ -46,7 +49,7 @@ export default function Home() {
                 href="#projects"
                 iconRight={<IconArrow orientation="down" size={16} />}
               >
-                explore
+                {t.home.explore}
               </Button>
               <Button
                 size="lg"
@@ -54,9 +57,10 @@ export default function Home() {
                 href="https://github.com/thebinarygarden"
                 iconLeft={<IconGithub size={16} />}
               >
-                contribute
+                {t.home.contribute}
               </Button>
-              <ThemeToggleButton />
+              <LocaleToggle />
+              <ThemeToggleButton labels={t.flora.theme} />
             </>
           }
         />

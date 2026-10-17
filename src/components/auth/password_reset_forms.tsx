@@ -3,8 +3,10 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Button, Input } from '@binarygarden/flora/form';
 import { authClient } from '@/lib/auth-client';
+import { errorText } from '@/lib/format';
+import type { Dict } from '@/lib/i18n';
 
-export function ForgotPasswordForm() {
+export function ForgotPasswordForm({ t }: { t: Dict['auth'] }) {
   const [sentTo, setSentTo] = useState('');
   const [error, setError] = useState('');
 
@@ -15,21 +17,25 @@ export function ForgotPasswordForm() {
       email,
       redirectTo: '/reset-password',
     });
-    if (error) setError(error.message ?? 'something went wrong.');
+    if (error) setError(errorText(t.errors, error, t.errors.generic));
     else setSentTo(email);
   }
 
-  if (sentTo)
+  if (sentTo) {
+    const [before, after] = t.forgot.sent.split('{email}');
     return (
       <p className="auth-note">
-        if an account exists for <b>{sentTo}</b>, a reset link is on its way.
+        {before}
+        <b>{sentTo}</b>
+        {after}
       </p>
     );
+  }
 
   return (
     <form onSubmit={onSubmit} className="auth-form">
       <Input
-        label="email"
+        label={t.email}
         name="email"
         type="email"
         autoComplete="email"
@@ -37,13 +43,19 @@ export function ForgotPasswordForm() {
       />
       {error && <p className="auth-error">{error}</p>}
       <Button type="submit" className="full">
-        send reset link
+        {t.forgot.submit}
       </Button>
     </form>
   );
 }
 
-export function ResetPasswordForm({ token }: { token?: string }) {
+export function ResetPasswordForm({
+  token,
+  t,
+}: {
+  token?: string;
+  t: Dict['auth'];
+}) {
   const [done, setDone] = useState(false);
   const [error, setError] = useState('');
 
@@ -53,15 +65,15 @@ export function ResetPasswordForm({ token }: { token?: string }) {
       new FormData(event.currentTarget).get('password')
     );
     const { error } = await authClient.resetPassword({ newPassword, token });
-    if (error) setError(error.message ?? 'something went wrong.');
+    if (error) setError(errorText(t.errors, error, t.errors.generic));
     else setDone(true);
   }
 
   if (!token) {
     return (
       <p className="auth-note">
-        this link is invalid or has expired.{' '}
-        <Link href="/forgot-password">request a new one</Link>.
+        {t.reset.invalid}{' '}
+        <Link href="/forgot-password">{t.reset.requestNew}</Link>.
       </p>
     );
   }
@@ -69,7 +81,7 @@ export function ResetPasswordForm({ token }: { token?: string }) {
   if (done) {
     return (
       <p className="auth-note">
-        password updated. <Link href="/sign-in">sign in</Link>.
+        {t.reset.done} <Link href="/sign-in">{t.reset.signIn}</Link>.
       </p>
     );
   }
@@ -77,17 +89,17 @@ export function ResetPasswordForm({ token }: { token?: string }) {
   return (
     <form onSubmit={onSubmit} className="auth-form">
       <Input
-        label="new password"
+        label={t.newPassword}
         name="password"
         type="password"
         autoComplete="new-password"
         minLength={8}
-        hint="at least 8 characters"
+        hint={t.passwordHint}
         required
       />
       {error && <p className="auth-error">{error}</p>}
       <Button type="submit" className="full">
-        set password
+        {t.reset.submit}
       </Button>
     </form>
   );

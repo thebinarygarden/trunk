@@ -6,8 +6,9 @@ import {
   createClient,
   type CreateClientState,
 } from '@/app/admin/clients/actions';
+import type { Dict } from '@/lib/i18n';
 
-export function CreateClientForm() {
+export function CreateClientForm({ t }: { t: Dict }) {
   const [state, action, pending] = useActionState<CreateClientState, FormData>(
     createClient,
     {}
@@ -16,43 +17,51 @@ export function CreateClientForm() {
   return (
     <form action={action} className="auth-form">
       <h2 className="auth-title" style={{ margin: 0 }}>
-        register an app
+        {t.admin.register}
       </h2>
-      <Input label="app name" name="name" placeholder="flora" required />
+      <Input label={t.admin.appName} name="name" placeholder="flora" required />
       <Input
-        label="redirect uris"
+        label={t.admin.redirectUris}
         name="redirectUris"
         placeholder="https://flora.app/api/auth/callback/binarygarden"
-        hint="space-separated"
+        hint={t.admin.spaceSeparated}
         required
       />
       <Checkbox
         name="firstParty"
         defaultChecked
-        label="first-party binary garden app"
-        description="skips the consent screen"
+        label={t.admin.firstParty}
+        description={t.admin.firstPartyNote}
       />
       <Checkbox
         name="publicClient"
-        label="public client (desktop or mobile app)"
-        description="no secret; pkce required. loopback redirect ports may vary"
+        label={t.admin.publicClient}
+        description={t.admin.publicClientNote}
       />
       {state.error && <p className="auth-error">{state.error}</p>}
       {state.clientId && (
         <div className="col" style={{ gap: 'var(--space-3)' }}>
           {state.clientSecret && (
             <Badge tone="warn" dot>
-              copy the secret now — it is not shown again
+              {t.admin.copySecret}
             </Badge>
           )}
-          <CopyableText label="client id" value={state.clientId} />
+          <CopyableText
+            label={t.admin.clientId}
+            value={state.clientId}
+            labels={t.flora.copy}
+          />
           {state.clientSecret && (
-            <CopyableText label="client secret" value={state.clientSecret} />
+            <CopyableText
+              label={t.admin.clientSecret}
+              value={state.clientSecret}
+              labels={t.flora.copy}
+            />
           )}
         </div>
       )}
       <Button type="submit" loading={pending} className="full">
-        create client
+        {t.admin.create}
       </Button>
     </form>
   );
