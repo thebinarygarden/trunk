@@ -32,12 +32,19 @@ export function CreateClientForm() {
         label="first-party binary garden app"
         description="skips the consent screen"
       />
+      <Checkbox
+        name="publicClient"
+        label="public client (desktop or mobile app)"
+        description="no secret; pkce required. loopback redirect ports may vary"
+      />
       {state.error && <p className="auth-error">{state.error}</p>}
       {state.clientId && (
         <div className="col" style={{ gap: 'var(--space-3)' }}>
-          <Badge tone="warn" dot>
-            copy the secret now — it is not shown again
-          </Badge>
+          {state.clientSecret && (
+            <Badge tone="warn" dot>
+              copy the secret now — it is not shown again
+            </Badge>
+          )}
           <CopyableText label="client id" value={state.clientId} />
           {state.clientSecret && (
             <CopyableText label="client secret" value={state.clientSecret} />

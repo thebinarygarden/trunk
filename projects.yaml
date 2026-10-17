@@ -22,3 +22,11 @@
   repoLink: https://github.com/notEduardo/TheCoolestMario
   liveLink: https://thecoolestmario-q6jviphbza-uc.a.run.app
   isLive: true
+- projectName: torta
+  hue: 90
+  projectDescription: "a restaurant pos that runs on your own laptop. free, open source, works without internet."
+  projectSkills: ["TypeScript", "Electron", "React"]
+  videoLink: https://binarygarden.com/inprogress
+  repoLink: https://github.com/thebinarygarden/torta
+  liveLink: https://github.com/thebinarygarden/torta/releases/latest
+  isLive: false
