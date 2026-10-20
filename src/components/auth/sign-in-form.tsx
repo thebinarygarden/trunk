@@ -4,8 +4,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button, Input } from '@binarygarden/flora/form';
 import { authClient } from '@/lib/auth-client';
-import { SocialButtons } from '@/components/auth/social_buttons';
+import { SocialButtons } from '@/components/auth/social-buttons';
 import type { SocialProvider } from '@/lib/auth';
+import { errorText } from '@/lib/format';
+import type { Dict } from '@/lib/i18n';
 
 // A sign-in that continues an OAuth flow returns { redirect, url } and the auth
 // client navigates there itself.
@@ -14,13 +16,15 @@ const isRedirecting = (data: unknown) =>
 
 export function SignInForm({
   socialProviders,
+  t,
 }: {
   socialProviders: SocialProvider[];
+  t: Dict['auth'];
 }) {
   const router = useRouter();
   const search = useSearchParams();
   const [error, setError] = useState(
-    search.has('error') ? 'sign-in failed. try again.' : ''
+    search.has('error') ? t.signIn.retry : ''
   );
   const [pending, setPending] = useState(false);
 
@@ -40,7 +44,7 @@ export function SignInForm({
 
   async function signInWithPasskey() {
     const { data, error } = await authClient.signIn.passkey();
-    if (error) setError(error.message ?? 'passkey sign-in failed.');
+    if (error) setError(errorText(t.errors, error, t.signIn.passkeyFailed));
     else if (!isRedirecting(data)) router.push('/account');
   }
 
@@ -55,7 +59,7 @@ export function SignInForm({
     });
     if (error) {
       setPending(false);
-      setError(error.message ?? 'sign-in failed.');
+      setError(errorText(t.errors, error, t.signIn.failed));
     }
   }
 
@@ -64,21 +68,21 @@ export function SignInForm({
 
   return (
     <div className="auth-form">
-      <SocialButtons providers={socialProviders} />
+      <SocialButtons providers={socialProviders} t={t} />
       <Button variant="secondary" className="full" onClick={signInWithPasskey}>
-        use a passkey
+        {t.signIn.passkey}
       </Button>
-      <div className="auth-divider">or</div>
+      <div className="auth-divider">{t.or}</div>
       <form onSubmit={onSubmit} className="auth-form">
         <Input
-          label="email"
+          label={t.email}
           name="email"
           type="email"
           autoComplete="username webauthn"
           required
         />
         <Input
-          label="password"
+          label={t.password}
           name="password"
           type="password"
           autoComplete="current-password"
@@ -86,12 +90,12 @@ export function SignInForm({
         />
         {error && <p className="auth-error">{error}</p>}
         <Button type="submit" loading={pending} className="full">
-          sign in
+          {t.signIn.submit}
         </Button>
       </form>
       <div className="auth-foot">
-        <Link href={`/sign-up${query}`}>create an account</Link>
-        <Link href="/forgot-password">forgot password?</Link>
+        <Link href={`/sign-up${query}`}>{t.signIn.createAccount}</Link>
+        <Link href="/forgot-password">{t.signIn.forgot}</Link>
       </div>
     </div>
   );

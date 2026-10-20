@@ -1,0 +1,141 @@
+{
+  "language": "language",
+  "flora": {
+    "theme": { "theme": "theme", "light": "light", "dark": "dark", "system": "system" },
+    "header": { "open": "open menu", "close": "close menu" },
+    "copy": { "copy": "copy", "copied": "copied", "value": "value" }
+  },
+  "nav": {
+    "github": "github",
+    "privacy": "privacy",
+    "terms": "terms",
+    "account": "account",
+    "signIn": "sign in",
+    "legal": "© 2026 binary garden · agpl"
+  },
+  "home": {
+    "subtitle": "home to every binary garden product. free, open source, made with love.",
+    "explore": "explore",
+    "contribute": "contribute",
+    "projects": "projects.",
+    "live": "live",
+    "inProgress": "in progress"
+  },
+  "product": {
+    "source": "source",
+    "downloadFor": "download for {os}",
+    "download": "download",
+    "moreDownloads": "more downloads",
+    "platforms": {
+      "macArm": "mac (apple silicon)",
+      "macIntel": "mac (intel)",
+      "windows": "windows",
+      "linux": "linux"
+    }
+  },
+  "auth": {
+    "back": "back to binary garden",
+    "or": "or",
+    "name": "name",
+    "email": "email",
+    "password": "password",
+    "newPassword": "new password",
+    "passwordHint": "at least 8 characters",
+    "continueWith": "continue with {provider}",
+    "signIn": {
+      "title": "sign in",
+      "passkey": "use a passkey",
+      "submit": "sign in",
+      "createAccount": "create an account",
+      "forgot": "forgot password?",
+      "failed": "sign-in failed.",
+      "retry": "sign-in failed. try again.",
+      "passkeyFailed": "passkey sign-in failed."
+    },
+    "signUp": {
+      "title": "create your account",
+      "submit": "create account",
+      "haveAccount": "already have an account? sign in",
+      "sent": "sent a verification link to {email}. open it to finish.",
+      "failed": "sign-up failed."
+    },
+    "forgot": {
+      "title": "reset your password",
+      "submit": "send reset link",
+      "sent": "if an account exists for {email}, a reset link is on its way."
+    },
+    "reset": {
+      "title": "choose a new password",
+      "submit": "set password",
+      "invalid": "this link is invalid or has expired.",
+      "requestNew": "request a new one",
+      "done": "password updated.",
+      "signIn": "sign in"
+    },
+    "account": {
+      "hi": "hi, {name}",
+      "userId": "user id",
+      "manageClients": "manage oauth clients",
+      "passkeys": "passkeys",
+      "passkey": "passkey",
+      "remove": "remove",
+      "noPasskeys": "sign in with face id, touch id, or a security key.",
+      "addPasskey": "add a passkey",
+      "addFailed": "could not add passkey.",
+      "signOut": "sign out"
+    },
+    "consent": {
+      "title": "allow {app}?",
+      "anApp": "an application",
+      "wants": "{app} wants to use your binary garden account to:",
+      "signedInAs": "signed in as {email}",
+      "allow": "allow",
+      "deny": "deny",
+      "scopes": {
+        "openid": "confirm who you are",
+        "profile": "see your name and profile picture",
+        "email": "see your email address",
+        "offline_access": "stay signed in without asking again"
+      }
+    },
+    "errors": {
+      "generic": "something went wrong.",
+      "INVALID_EMAIL_OR_PASSWORD": "wrong email or password.",
+      "INVALID_EMAIL": "that email address doesn't look right.",
+      "INVALID_PASSWORD": "wrong password.",
+      "EMAIL_NOT_VERIFIED": "verify your email first. check your inbox for the link.",
+      "USER_ALREADY_EXISTS": "an account with that email already exists.",
+      "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "an account with that email already exists.",
+      "PASSWORD_TOO_SHORT": "the password is too short.",
+      "PASSWORD_TOO_LONG": "the password is too long.",
+      "INVALID_TOKEN": "this link is invalid or has expired.",
+      "TOO_MANY_REQUESTS": "too many attempts. wait a minute and try again."
+    }
+  },
+  "admin": {
+    "title": "oauth clients",
+    "unnamed": "unnamed",
+    "register": "register an app",
+    "appName": "app name",
+    "redirectUris": "redirect uris",
+    "spaceSeparated": "space-separated",
+    "firstParty": "first-party binary garden app",
+    "firstPartyNote": "skips the consent screen",
+    "publicClient": "public client (desktop or mobile app)",
+    "publicClientNote": "no secret; pkce required. loopback redirect ports may vary",
+    "copySecret": "copy the secret now — it is not shown again",
+    "clientId": "client id",
+    "clientSecret": "client secret",
+    "create": "create client"
+  },
+  "legal": {
+    "privacy": "privacy · binary garden",
+    "terms": "terms · binary garden"
+  },
+  "email": {
+    "resetSubject": "Reset your Binary Garden password",
+    "resetBody": "Reset your password: {url}",
+    "verifySubject": "Verify your Binary Garden email",
+    "verifyBody": "Verify your email: {url}"
+  }
+}

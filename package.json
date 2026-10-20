@@ -1,6 +1,7 @@
 {
   "name": "trunk",
   "version": "0.1.0",
+  "license": "AGPL-3.0-or-later",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -14,10 +15,9 @@
     "@better-auth/oauth-provider": "^1.7.4",
     "@better-auth/passkey": "^1.7.4",
     "@better-auth/utils": "0.4.2",
-    "@binarygarden/flora": "^0.1.2",
+    "@binarygarden/flora": "^0.1.5",
     "better-auth": "^1.7.4",
     "framer-motion": "^13.2.0",
-    "js-yaml": "^5.4.2",
     "next": "16.3.5",
     "pg": "^8.23.0",
     "react": "19.3.0",

@@ -1,26 +1,20 @@
 import { BGLanding } from '@binarygarden/flora/bg';
 import { Button } from '@binarygarden/flora/form';
-import { ThemeToggleButton } from '@binarygarden/flora/theme';
 import { IconArrow, IconBGLogo, IconGithub } from '@binarygarden/flora/icons';
-import BGContent from '@/components/content/bg_content';
-import {
-  AccountButton,
-  SiteChrome,
-  SiteFoot,
-} from '@/components/site_chrome';
+import BGContent from '@/components/content/bg-content';
+import { getI18n } from '@/lib/i18n';
+import { SiteActions, SiteNav, SiteFoot } from '@/components/site-chrome';
 
-export default function Home() {
+export default async function Home() {
+  const { t } = await getI18n();
   return (
     <>
-      {/* the hero carries the nav, so the bar waits until its buttons leave */}
-      <SiteChrome revealAfter=".fl-hero-actions" />
+      {/* the hero carries the nav, so the bar waits until it has gone; the
+          small controls sit in the hero's corner until the bar brings them */}
+      <SiteNav overLanding />
       <main>
-        {/* while the header is hidden, the account icon waits where the
-            header will put it: top right */}
-        <div className="hero-corner">
-          <AccountButton />
-        </div>
         <BGLanding
+          corner={<SiteActions />}
           eyebrowMark={<IconBGLogo size={6} />}
           eyebrow="binary garden"
           title={
@@ -28,7 +22,7 @@ export default function Home() {
                 simul sumus plus
             </>
           }
-          subtitle="home to every binary garden product. free, open source, made with love."
+          subtitle={t.home.subtitle}
           background={
             <video
               className="landing-video"
@@ -46,7 +40,7 @@ export default function Home() {
                 href="#projects"
                 iconRight={<IconArrow orientation="down" size={16} />}
               >
-                explore
+                {t.home.explore}
               </Button>
               <Button
                 size="lg"
@@ -54,9 +48,8 @@ export default function Home() {
                 href="https://github.com/thebinarygarden"
                 iconLeft={<IconGithub size={16} />}
               >
-                contribute
+                {t.home.contribute}
               </Button>
-              <ThemeToggleButton />
             </>
           }
         />

@@ -1,0 +1,32 @@
+{
+  "title": "un punto de venta para la laptop que ya tienes.",
+  "features": {
+    "title": "cómo funciona.",
+    "items": [
+      {
+        "title": "la laptop es el servidor",
+        "body": "instala torta en mac, windows o linux. el menú, cada orden y el historial de ventas se quedan en esa laptop."
+      },
+      {
+        "title": "tabletas y teléfonos toman órdenes",
+        "body": "cualquier dispositivo en el mismo wifi abre un enlace de la laptop. no hay nada que instalar."
+      },
+      {
+        "title": "funciona sin internet",
+        "body": "las órdenes y la cocina funcionan en tu propio wifi. una cuenta de binary garden es opcional."
+      },
+      {
+        "title": "vincula con un código",
+        "body": "escanea un código qr o escribe un código de seis dígitos. quita un dispositivo para revocarlo."
+      },
+      {
+        "title": "pantalla de cocina en vivo",
+        "body": "las órdenes llegan a la cocina en cuanto se envían, en cualquier tableta."
+      },
+      {
+        "title": "gratis y de código abierto",
+        "body": "licencia agpl. lee el código, cámbialo, úsalo."
+      }
+    ]
+  }
+}

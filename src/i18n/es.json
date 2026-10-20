@@ -1,0 +1,141 @@
+{
+  "language": "idioma",
+  "flora": {
+    "theme": { "theme": "tema", "light": "claro", "dark": "oscuro", "system": "sistema" },
+    "header": { "open": "abrir menú", "close": "cerrar menú" },
+    "copy": { "copy": "copiar", "copied": "copiado", "value": "valor" }
+  },
+  "nav": {
+    "github": "github",
+    "privacy": "privacidad",
+    "terms": "términos",
+    "account": "cuenta",
+    "signIn": "iniciar sesión",
+    "legal": "© 2026 binary garden · agpl"
+  },
+  "home": {
+    "subtitle": "el hogar de cada producto de binary garden. gratis, de código abierto, hecho con cariño.",
+    "explore": "explorar",
+    "contribute": "contribuir",
+    "projects": "proyectos.",
+    "live": "en línea",
+    "inProgress": "en desarrollo"
+  },
+  "product": {
+    "source": "código",
+    "downloadFor": "descargar para {os}",
+    "download": "descargar",
+    "moreDownloads": "más descargas",
+    "platforms": {
+      "macArm": "mac (apple silicon)",
+      "macIntel": "mac (intel)",
+      "windows": "windows",
+      "linux": "linux"
+    }
+  },
+  "auth": {
+    "back": "volver a binary garden",
+    "or": "o",
+    "name": "nombre",
+    "email": "correo",
+    "password": "contraseña",
+    "newPassword": "nueva contraseña",
+    "passwordHint": "al menos 8 caracteres",
+    "continueWith": "continuar con {provider}",
+    "signIn": {
+      "title": "iniciar sesión",
+      "passkey": "usar una llave de acceso",
+      "submit": "iniciar sesión",
+      "createAccount": "crear una cuenta",
+      "forgot": "¿olvidaste tu contraseña?",
+      "failed": "no se pudo iniciar sesión.",
+      "retry": "no se pudo iniciar sesión. inténtalo de nuevo.",
+      "passkeyFailed": "no se pudo iniciar sesión con la llave de acceso."
+    },
+    "signUp": {
+      "title": "crea tu cuenta",
+      "submit": "crear cuenta",
+      "haveAccount": "¿ya tienes una cuenta? inicia sesión",
+      "sent": "enviamos un enlace de verificación a {email}. ábrelo para terminar.",
+      "failed": "no se pudo crear la cuenta."
+    },
+    "forgot": {
+      "title": "restablece tu contraseña",
+      "submit": "enviar enlace",
+      "sent": "si existe una cuenta para {email}, el enlace va en camino."
+    },
+    "reset": {
+      "title": "elige una nueva contraseña",
+      "submit": "guardar contraseña",
+      "invalid": "este enlace no es válido o ya caducó.",
+      "requestNew": "pide uno nuevo",
+      "done": "contraseña actualizada.",
+      "signIn": "inicia sesión"
+    },
+    "account": {
+      "hi": "hola, {name}",
+      "userId": "id de usuario",
+      "manageClients": "gestionar clientes oauth",
+      "passkeys": "llaves de acceso",
+      "passkey": "llave de acceso",
+      "remove": "quitar",
+      "noPasskeys": "inicia sesión con face id, touch id o una llave de seguridad.",
+      "addPasskey": "añadir una llave de acceso",
+      "addFailed": "no se pudo añadir la llave de acceso.",
+      "signOut": "cerrar sesión"
+    },
+    "consent": {
+      "title": "¿permitir a {app}?",
+      "anApp": "una aplicación",
+      "wants": "{app} quiere usar tu cuenta de binary garden para:",
+      "signedInAs": "sesión iniciada como {email}",
+      "allow": "permitir",
+      "deny": "rechazar",
+      "scopes": {
+        "openid": "confirmar quién eres",
+        "profile": "ver tu nombre y foto de perfil",
+        "email": "ver tu correo electrónico",
+        "offline_access": "mantener tu sesión sin volver a preguntar"
+      }
+    },
+    "errors": {
+      "generic": "algo salió mal.",
+      "INVALID_EMAIL_OR_PASSWORD": "correo o contraseña incorrectos.",
+      "INVALID_EMAIL": "ese correo no parece válido.",
+      "INVALID_PASSWORD": "contraseña incorrecta.",
+      "EMAIL_NOT_VERIFIED": "primero verifica tu correo. busca el enlace en tu bandeja de entrada.",
+      "USER_ALREADY_EXISTS": "ya existe una cuenta con ese correo.",
+      "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "ya existe una cuenta con ese correo.",
+      "PASSWORD_TOO_SHORT": "la contraseña es demasiado corta.",
+      "PASSWORD_TOO_LONG": "la contraseña es demasiado larga.",
+      "INVALID_TOKEN": "este enlace no es válido o ya caducó.",
+      "TOO_MANY_REQUESTS": "demasiados intentos. espera un minuto y vuelve a intentarlo."
+    }
+  },
+  "admin": {
+    "title": "clientes oauth",
+    "unnamed": "sin nombre",
+    "register": "registrar una app",
+    "appName": "nombre de la app",
+    "redirectUris": "uris de redirección",
+    "spaceSeparated": "separadas por espacios",
+    "firstParty": "app propia de binary garden",
+    "firstPartyNote": "se salta la pantalla de consentimiento",
+    "publicClient": "cliente público (app de escritorio o móvil)",
+    "publicClientNote": "sin secreto; requiere pkce. los puertos de redirección local pueden variar",
+    "copySecret": "copia el secreto ahora — no se vuelve a mostrar",
+    "clientId": "id de cliente",
+    "clientSecret": "secreto de cliente",
+    "create": "crear cliente"
+  },
+  "legal": {
+    "privacy": "privacidad · binary garden",
+    "terms": "términos · binary garden"
+  },
+  "email": {
+    "resetSubject": "Restablece tu contraseña de Binary Garden",
+    "resetBody": "Restablece tu contraseña: {url}",
+    "verifySubject": "Verifica tu correo de Binary Garden",
+    "verifyBody": "Verifica tu correo: {url}"
+  }
+}

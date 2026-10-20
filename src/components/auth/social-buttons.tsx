@@ -3,6 +3,8 @@ import { Button } from '@binarygarden/flora/form';
 import { IconGithub } from '@binarygarden/flora/icons';
 import { authClient } from '@/lib/auth-client';
 import type { SocialProvider } from '@/lib/auth';
+import { format } from '@/lib/format';
+import type { Dict } from '@/lib/i18n';
 
 const labels: Record<SocialProvider, string> = {
   apple: 'apple',
@@ -16,7 +18,13 @@ const icons: Partial<Record<SocialProvider, React.ReactNode>> = {
   github: <IconGithub size={16} />,
 };
 
-export function SocialButtons({ providers }: { providers: SocialProvider[] }) {
+export function SocialButtons({
+  providers,
+  t,
+}: {
+  providers: SocialProvider[];
+  t: Dict['auth'];
+}) {
   if (!providers.length) return null;
   return (
     <div className="col" style={{ gap: 'var(--space-2)' }}>
@@ -34,7 +42,7 @@ export function SocialButtons({ providers }: { providers: SocialProvider[] }) {
             })
           }
         >
-          continue with {labels[provider]}
+          {format(t.continueWith, { provider: labels[provider] })}
         </Button>
       ))}
     </div>

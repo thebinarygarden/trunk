@@ -4,13 +4,17 @@ import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { Button, Input } from '@binarygarden/flora/form';
 import { authClient } from '@/lib/auth-client';
-import { SocialButtons } from '@/components/auth/social_buttons';
+import { SocialButtons } from '@/components/auth/social-buttons';
 import type { SocialProvider } from '@/lib/auth';
+import { errorText } from '@/lib/format';
+import type { Dict } from '@/lib/i18n';
 
 export function SignUpForm({
   socialProviders,
+  t,
 }: {
   socialProviders: SocialProvider[];
+  t: Dict['auth'];
 }) {
   const search = useSearchParams();
   const [error, setError] = useState('');
@@ -29,47 +33,50 @@ export function SignUpForm({
       callbackURL: '/account',
     });
     setPending(false);
-    if (error) setError(error.message ?? 'sign-up failed.');
+    if (error) setError(errorText(t.errors, error, t.signUp.failed));
     else setSentTo(email);
   }
 
   if (sentTo) {
+    const [before, after] = t.signUp.sent.split('{email}');
     return (
       <p className="auth-note">
-        sent a verification link to <b>{sentTo}</b>. open it to finish.
+        {before}
+        <b>{sentTo}</b>
+        {after}
       </p>
     );
   }
 
   return (
     <div className="auth-form">
-      <SocialButtons providers={socialProviders} />
-      {socialProviders.length > 0 && <div className="auth-divider">or</div>}
+      <SocialButtons providers={socialProviders} t={t} />
+      {socialProviders.length > 0 && <div className="auth-divider">{t.or}</div>}
       <form onSubmit={onSubmit} className="auth-form">
-        <Input label="name" name="name" autoComplete="name" required />
+        <Input label={t.name} name="name" autoComplete="name" required />
         <Input
-          label="email"
+          label={t.email}
           name="email"
           type="email"
           autoComplete="email"
           required
         />
         <Input
-          label="password"
+          label={t.password}
           name="password"
           type="password"
           autoComplete="new-password"
           minLength={8}
-          hint="at least 8 characters"
+          hint={t.passwordHint}
           required
         />
         {error && <p className="auth-error">{error}</p>}
         <Button type="submit" loading={pending} className="full">
-          create account
+          {t.signUp.submit}
         </Button>
       </form>
       <Link href={`/sign-in${search.size ? `?${search}` : ''}`}>
-        already have an account? sign in
+        {t.signUp.haveAccount}
       </Link>
     </div>
   );

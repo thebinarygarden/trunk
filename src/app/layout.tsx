@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Hanken_Grotesk } from 'next/font/google';
 import './globals.css';
 import { ScriptPreloadTheme } from '@binarygarden/flora/theme';
+import { getI18n } from '@/lib/i18n';
 
 // Self-hosted by next/font, so there is no render-blocking request to Google
 // and no flash of the fallback stack. flora only names the family.
@@ -17,14 +18,15 @@ export const metadata: Metadata = {
   description: 'simul sumus plus',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { locale } = await getI18n();
   return (
     <html
-      lang="en"
+      lang={locale}
       className={hanken.variable}
       // Next 16 leaves smooth scrolling on during route changes unless told
       data-scroll-behavior="smooth"
