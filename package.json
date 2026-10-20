@@ -15,7 +15,7 @@
     "@better-auth/oauth-provider": "^1.7.4",
     "@better-auth/passkey": "^1.7.4",
     "@better-auth/utils": "0.4.2",
-    "@binarygarden/flora": "^0.1.2",
+    "@binarygarden/flora": "^0.1.5",
     "better-auth": "^1.7.4",
     "framer-motion": "^13.2.0",
     "next": "16.3.5",
