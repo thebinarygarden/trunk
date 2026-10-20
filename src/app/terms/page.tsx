@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { IconArrow } from '@binarygarden/flora/icons';
-import { LocaleToggle } from '@/components/locale_toggle';
+import { LocaleToggle } from '@/components/locale-toggle';
 import { getI18n } from '@/lib/i18n';
 import { TermsContent as En } from './content.en';
 import { TermsContent as Es } from './content.es';

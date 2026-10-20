@@ -1,5 +1,5 @@
-import { AuthCard } from '@/components/auth/auth_card';
-import { ResetPasswordForm } from '@/components/auth/password_reset_forms';
+import { AuthCard } from '@/components/auth/auth-card';
+import { ResetPasswordForm } from '@/components/auth/password-reset-forms';
 import { getI18n } from '@/lib/i18n';
 
 // Better Auth sends users here with ?token=... (or ?error=INVALID_TOKEN).

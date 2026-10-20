@@ -1,29 +1,20 @@
 import { BGLanding } from '@binarygarden/flora/bg';
 import { Button } from '@binarygarden/flora/form';
-import { ThemeToggleButton } from '@binarygarden/flora/theme';
 import { IconArrow, IconBGLogo, IconGithub } from '@binarygarden/flora/icons';
-import BGContent from '@/components/content/bg_content';
-import { LocaleToggle } from '@/components/locale_toggle';
+import BGContent from '@/components/content/bg-content';
 import { getI18n } from '@/lib/i18n';
-import {
-  AccountButton,
-  SiteChrome,
-  SiteFoot,
-} from '@/components/site_chrome';
+import { SiteActions, SiteNav, SiteFoot } from '@/components/site-chrome';
 
 export default async function Home() {
   const { t } = await getI18n();
   return (
     <>
-      {/* the hero carries the nav, so the bar waits until its buttons leave */}
-      <SiteChrome revealAfter=".fl-hero-actions" />
+      {/* the hero carries the nav, so the bar waits until it has gone; the
+          small controls sit in the hero's corner until the bar brings them */}
+      <SiteNav overLanding />
       <main>
-        {/* while the header is hidden, the account icon waits where the
-            header will put it: top right */}
-        <div className="hero-corner">
-          <AccountButton />
-        </div>
         <BGLanding
+          corner={<SiteActions />}
           eyebrowMark={<IconBGLogo size={6} />}
           eyebrow="binary garden"
           title={
@@ -59,8 +50,6 @@ export default async function Home() {
               >
                 {t.home.contribute}
               </Button>
-              <LocaleToggle />
-              <ThemeToggleButton labels={t.flora.theme} />
             </>
           }
         />

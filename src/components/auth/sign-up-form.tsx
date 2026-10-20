@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { Button, Input } from '@binarygarden/flora/form';
 import { authClient } from '@/lib/auth-client';
-import { SocialButtons } from '@/components/auth/social_buttons';
+import { SocialButtons } from '@/components/auth/social-buttons';
 import type { SocialProvider } from '@/lib/auth';
 import { errorText } from '@/lib/format';
 import type { Dict } from '@/lib/i18n';

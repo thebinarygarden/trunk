@@ -21,10 +21,19 @@
     "contribute": "contribute",
     "projects": "projects.",
     "live": "live",
-    "inProgress": "in progress",
-    "close": "close",
+    "inProgress": "in progress"
+  },
+  "product": {
     "source": "source",
-    "play": "play {name}"
+    "downloadFor": "download for {os}",
+    "download": "download",
+    "moreDownloads": "more downloads",
+    "platforms": {
+      "macArm": "mac (apple silicon)",
+      "macIntel": "mac (intel)",
+      "windows": "windows",
+      "linux": "linux"
+    }
   },
   "auth": {
     "back": "back to binary garden",

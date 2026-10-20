@@ -20,38 +20,9 @@
   display: grid;
   gap: var(--space-8);
 }
-/* the account icon over the landing hero, lined up with the header's
-   actions so it sits exactly where the header will bring it in */
-.hero-corner {
-  position: absolute;
-  inset: 0 0 auto;
-  z-index: 1;
-  max-width: var(--container-lg);
-  height: 60px;
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  pointer-events: none;
-}
-.hero-corner > * {
-  pointer-events: auto;
-}
-
 /* the landing's background video, dimmed behind the hero */
 .landing-video {
     opacity: 20%;
-}
-
-/* BGLanding snaps to the hero's bottom edge and the header reveals once the
-   hero's buttons leave the top, so whatever follows the hero must be at least
-   a screen tall, or the hero can never scroll fully away */
-.fl-bgl + .section {
-  min-height: 100svh;
-  box-sizing: border-box;
-  align-content: start;
 }
 .section-head {
   display: grid;
@@ -99,32 +70,64 @@
   align-content: start;
 }
 
-/* the project sheet's video */
-.sheet-video {
-  position: relative;
-  width: 100%;
+/* ---------------------------------------------------------- product page */
+/* the logo or video above a product's headline */
+.product-top {
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: var(--space-16) var(--gutter) 0;
+  box-sizing: border-box;
+  display: grid;
+  justify-items: center;
+}
+.product-top + .fl-hero {
+  padding-top: var(--space-8);
+}
+/* the app icon's tile: the page colour behind the mark, in either theme */
+.product-logo {
+  display: inline-grid;
+  place-items: center;
+  width: 200px;
+  aspect-ratio: 1;
+  background: var(--surface-raised);
+  border: 1px solid var(--line-1);
+  border-radius: var(--radius-lg);
+  color: var(--accent);
+  animation: bg-grow var(--dur-4) var(--ease-spring) both;
+}
+.product-video {
   aspect-ratio: 16 / 9;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--surface-sunken);
   border: 1px solid var(--line-1);
 }
-.sheet-video iframe {
-  position: absolute;
-  inset: 0;
+.product-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+/* the last section needs room before the footer */
+.product > .section:last-child {
+  padding-bottom: var(--space-24);
+}
+
+/* an older project's site, full screen under the header */
+.product-embed {
+  height: calc(100svh - 60px);
+  background: var(--surface-sunken);
+}
+.product-embed iframe {
+  display: block;
   width: 100%;
   height: 100%;
   border: 0;
-}
-.sheet-desc {
-  font: var(--type-small);
-  color: var(--text-muted);
-  margin: 0;
-  text-wrap: pretty;
-}
-.sheet-desc b {
-  color: var(--text-body);
-  font-weight: var(--weight-medium);
 }
 
 /* ------------------------------------------------------------------ auth */

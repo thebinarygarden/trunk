@@ -1,8 +1,8 @@
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { Card } from '@binarygarden/flora/ui';
-import { AuthCard } from '@/components/auth/auth_card';
-import { CreateClientForm } from '@/app/admin/clients/create_client_form';
+import { AuthCard } from '@/components/auth/auth-card';
+import { CreateClientForm } from '@/app/admin/clients/create-client-form';
 import { adminUserIds, auth } from '@/lib/auth';
 import { getI18n } from '@/lib/i18n';
 

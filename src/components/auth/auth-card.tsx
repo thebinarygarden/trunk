@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Card } from '@binarygarden/flora/ui';
 import { IconArrow } from '@binarygarden/flora/icons';
-import { LocaleToggle } from '@/components/locale_toggle';
+import { LocaleToggle } from '@/components/locale-toggle';
 import { getI18n } from '@/lib/i18n';
 
 /**

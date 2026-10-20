@@ -39,7 +39,7 @@ Regardless of how you run the service, open [http://localhost:3000](http://local
 
 ## Content
 
-Projects shown on the home page are defined in `projects.yaml`.
+Products shown on the home page are listed in `src/products/index.ts`. Each one has its own directory there (metadata, copy, page) and a route at `src/app/projects/<slug>/`; the shared page frame is `src/components/product/`.
 
 ## Deployment
 

@@ -2,9 +2,10 @@
 
 # CLAUDE.md
 
-**trunk** is the codebase behind `binarygarden.com`: the landing page, the list of projects
-(`projects.yaml`), and the **central auth server** for the ecosystem (Better Auth as an
-OAuth 2.1 / OpenID Connect provider that other Binary Garden apps sign in through).
+**trunk** is the codebase behind `binarygarden.com`: the landing page, the product pages
+(`src/products/`, one directory per product), and the **central auth server** for the
+ecosystem (Better Auth as an OAuth 2.1 / OpenID Connect provider that other Binary Garden
+apps sign in through).
 Next.js App Router, pnpm, PostgreSQL.
 
 The UI is built entirely from `@binarygarden/flora`; read `../flora/docs/DESIGN.md` before

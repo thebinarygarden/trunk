@@ -1,0 +1,32 @@
+{
+  "title": "a restaurant pos for the laptop you have.",
+  "features": {
+    "title": "how it works.",
+    "items": [
+      {
+        "title": "the laptop is the server",
+        "body": "install torta on mac, windows or linux. the menu, every order and the sales history stay on that laptop."
+      },
+      {
+        "title": "tablets and phones take orders",
+        "body": "any device on the same wifi opens a link from the laptop. nothing to install."
+      },
+      {
+        "title": "works without internet",
+        "body": "ordering and the kitchen run over your own wifi. a binary garden account is optional."
+      },
+      {
+        "title": "pair with a code",
+        "body": "scan a qr code or type a six-digit code. remove a device to revoke it."
+      },
+      {
+        "title": "live kitchen screen",
+        "body": "orders reach the kitchen the moment they are sent, on any tablet."
+      },
+      {
+        "title": "free and open source",
+        "body": "agpl licensed. read the code, change it, run it."
+      }
+    ]
+  }
+}

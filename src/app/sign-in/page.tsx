@@ -1,6 +1,6 @@
 import { connection } from 'next/server';
-import { AuthCard } from '@/components/auth/auth_card';
-import { SignInForm } from '@/components/auth/sign_in_form';
+import { AuthCard } from '@/components/auth/auth-card';
+import { SignInForm } from '@/components/auth/sign-in-form';
 import { enabledSocialProviders } from '@/lib/auth';
 import { getI18n } from '@/lib/i18n';
 

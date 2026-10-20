@@ -1,19 +1,15 @@
 import { SiteHeader } from '@binarygarden/flora/navigation';
 import { BGFooter } from '@binarygarden/flora/bg';
 import { ThemeToggleButton } from '@binarygarden/flora/theme';
-import { Button, IconButton } from '@binarygarden/flora/form';
-import {
-  IconAccount,
-  IconBGLogo,
-  IconGithub,
-} from '@binarygarden/flora/icons';
+import { IconButton } from '@binarygarden/flora/form';
+import { IconAccount, IconBGLogo } from '@binarygarden/flora/icons';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { getI18n, type Dict } from '@/lib/i18n';
-import { LocaleToggle } from '@/components/locale_toggle';
+import { LocaleToggle } from '@/components/locale-toggle';
 
 const links = (t: Dict) => [
-  { label: t.nav.projects, href: '#projects' },
+  { label: t.nav.projects, href: '/#projects' },
   { label: t.nav.flora, href: 'https://bgflora.app' },
 ];
 
@@ -25,7 +21,7 @@ const footerLinks = (t: Dict) => [
 ];
 
 /** The account icon: your account when signed in, sign in when not. */
-export async function AccountButton() {
+async function AccountButton() {
   const session = await auth.api.getSession({ headers: await headers() });
   const { t } = await getI18n();
   return (
@@ -38,8 +34,20 @@ export async function AccountButton() {
   );
 }
 
-/** `revealAfter`: a selector; the bar stays hidden until it scrolls away. */
-export async function SiteChrome({ revealAfter }: { revealAfter?: string }) {
+/** The small controls: in the header, and in the landing's corner. */
+export async function SiteActions() {
+  const { t } = await getI18n();
+  return (
+    <>
+      <LocaleToggle />
+      <ThemeToggleButton labels={t.flora.theme} />
+      <AccountButton />
+    </>
+  );
+}
+
+/** `overLanding`: the page opens with a BGLanding; the bar waits until it has gone. */
+export async function SiteNav({ overLanding }: { overLanding?: boolean }) {
   const { t } = await getI18n();
   return (
     <SiteHeader
@@ -50,23 +58,9 @@ export async function SiteChrome({ revealAfter }: { revealAfter?: string }) {
         </>
       }
       links={links(t)}
-      revealAfter={revealAfter}
+      overLanding={overLanding}
       labels={t.flora.header}
-      actions={
-        <>
-          <LocaleToggle />
-          <ThemeToggleButton labels={t.flora.theme} />
-          <Button
-            variant="secondary"
-            size="sm"
-            href="https://github.com/thebinarygarden"
-            iconLeft={<IconGithub size={14} />}
-          >
-            {t.nav.github}
-          </Button>
-          <AccountButton />
-        </>
-      }
+      actions={<SiteActions />}
     />
   );
 }

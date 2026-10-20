@@ -1,7 +1,7 @@
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { AuthCard } from '@/components/auth/auth_card';
-import { ConsentButtons } from '@/components/auth/consent_buttons';
+import { AuthCard } from '@/components/auth/auth-card';
+import { ConsentButtons } from '@/components/auth/consent-buttons';
 import { auth } from '@/lib/auth';
 import { format } from '@/lib/format';
 import { getI18n } from '@/lib/i18n';
