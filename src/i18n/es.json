@@ -6,8 +6,6 @@
     "copy": { "copy": "copiar", "copied": "copiado", "value": "valor" }
   },
   "nav": {
-    "projects": "proyectos",
-    "flora": "flora",
     "github": "github",
     "privacy": "privacidad",
     "terms": "términos",

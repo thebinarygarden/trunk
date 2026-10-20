@@ -1,0 +1,5 @@
+{
+  "title": "los componentes con los que se construye cada producto de binary garden.",
+  "subtitle": "componentes de react sobre una sola hoja de estilos basada en tokens, donde un solo tono es todo el tema. cada token y componente está en vivo en bgflora.app.",
+  "open": "abrir bgflora.app"
+}

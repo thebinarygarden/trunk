@@ -8,13 +8,7 @@ import { headers } from 'next/headers';
 import { getI18n, type Dict } from '@/lib/i18n';
 import { LocaleToggle } from '@/components/locale-toggle';
 
-const links = (t: Dict) => [
-  { label: t.nav.projects, href: '/#projects' },
-  { label: t.nav.flora, href: 'https://bgflora.app' },
-];
-
 const footerLinks = (t: Dict) => [
-  ...links(t),
   { label: t.nav.github, href: 'https://github.com/thebinarygarden' },
   { label: t.nav.privacy, href: '/privacy' },
   { label: t.nav.terms, href: '/terms' },
@@ -57,7 +51,6 @@ export async function SiteNav({ overLanding }: { overLanding?: boolean }) {
           <span className="fl-header-brand-name">binary garden</span>
         </>
       }
-      links={links(t)}
       overLanding={overLanding}
       labels={t.flora.header}
       actions={<SiteActions />}
