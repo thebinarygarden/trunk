@@ -20,6 +20,10 @@
   display: grid;
   gap: var(--space-8);
 }
+/* right after the landing the header bar's 61px already spaces it */
+.fl-bgl + .section {
+  padding-top: var(--space-5);
+}
 /* the landing's background video, dimmed behind the hero */
 .landing-video {
     opacity: 20%;
